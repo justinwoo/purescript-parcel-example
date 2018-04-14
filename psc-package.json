@@ -1,0 +1,10 @@
+{
+  "name": "some-ps-thing",
+  "set": "pho",
+  "source": "https://github.com/justinwoo/package-sets.git",
+  "depends": [
+    "react-basic",
+    "eff",
+    "prelude"
+  ]
+}
