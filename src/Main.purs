@@ -2,7 +2,7 @@ module Main where
 
 import Prelude
 
-import Control.Monad.Eff.Uncurried (mkEffFn1)
+import Effect.Uncurried (mkEffectFn1)
 import React.Basic (ReactComponent, react)
 import React.Basic.DOM as R
 
@@ -32,7 +32,7 @@ example = react
           R.h1 { children: [ R.text "Hello World" ]}
         button =
           R.button
-            { onClick: mkEffFn1 \_ -> do
+            { onClick: mkEffectFn1 \_ -> do
                 setState \s -> { counter: s.counter + 1 }
             , children:
                 [ R.text (label <> ": " <> show counter)
