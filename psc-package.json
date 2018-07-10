@@ -1,10 +1,11 @@
 {
-  "name": "some-ps-thing",
-  "set": "pho",
-  "source": "https://github.com/justinwoo/package-sets.git",
+  "name": "purescript-parcel-example",
+  "set": "psc-0.12.0-20180704",
+  "source": "https://github.com/purescript/package-sets.git",
   "depends": [
+    "effect",
+    "psci-support",
     "react-basic",
-    "eff",
     "prelude"
   ]
 }
