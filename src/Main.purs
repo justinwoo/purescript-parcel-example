@@ -5,6 +5,7 @@ import Prelude
 import Effect.Uncurried (mkEffectFn1)
 import React.Basic as React
 import React.Basic.DOM as R
+foreign import foreignHMR :: forall c c'. React.Component c -> React.Component c'
 
 type ExampleProps =
   { label :: String
@@ -14,8 +15,11 @@ type ExampleState =
   { counter :: Int
   }
 
-example :: React.Component ExampleProps
-example = React.component
+example :: forall c. React.Component c
+example = foreignHMR example'
+
+example' :: React.Component ExampleProps
+example' = React.component
   { displayName: "example"
   , initialState
   , receiveProps
