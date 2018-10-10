@@ -5,6 +5,7 @@ import Prelude
 import Effect.Uncurried (mkEffectFn1)
 import React.Basic as React
 import React.Basic.DOM as R
+foreign import foreignHMR :: forall c r. React.Component c -> r
 
 type ExampleProps =
   { label :: String
@@ -14,8 +15,8 @@ type ExampleState =
   { counter :: Int
   }
 
-example :: React.Component ExampleProps
-example = React.component
+example' :: React.Component ExampleProps
+example' = React.component
   { displayName: "example"
   , initialState
   , receiveProps
@@ -29,7 +30,7 @@ example = React.component
     render { props, state, setState } =
       let
         hello =
-          R.h1 { children: [ R.text "Hello World" ]}
+          R.h1 { children: [ R.text "Hel ssold" ]}
         button =
           R.button
             { onClick: mkEffectFn1 \_ -> do
@@ -45,3 +46,5 @@ example = React.component
               , button
               ]
           }
+
+example = foreignHMR example'
