@@ -30,7 +30,7 @@ example' = React.component
     render { props, state, setState } =
       let
         hello =
-          R.h1 { children: [ R.text "Hel ssold" ]}
+          R.h1 { children: [ R.text "Hello World" ]}
         button =
           R.button
             { onClick: mkEffectFn1 \_ -> do
