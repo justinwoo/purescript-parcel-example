@@ -3,8 +3,9 @@ module Main where
 import Prelude
 
 import Effect.Uncurried (mkEffectFn1)
-import React.Basic (ReactComponent, react)
+import React.Basic as React
 import React.Basic.DOM as R
+foreign import foreignHMR :: React.Component ~> React.Component
 
 type ExampleProps =
   { label :: String
@@ -14,8 +15,11 @@ type ExampleState =
   { counter :: Int
   }
 
-example :: ReactComponent ExampleProps
-example = react
+example :: React.Component ExampleProps
+example = foreignHMR example'
+
+example' :: React.Component ExampleProps
+example' = React.component
   { displayName: "example"
   , initialState
   , receiveProps
@@ -24,9 +28,9 @@ example = react
   where
     initialState :: ExampleState
     initialState = { counter: 0 }
-    receiveProps _ _ _ = pure unit
+    receiveProps _ = pure unit
 
-    render { label } { counter } setState =
+    render { props, state, setState } =
       let
         hello =
           R.h1 { children: [ R.text "Hello World" ]}
@@ -35,7 +39,7 @@ example = react
             { onClick: mkEffectFn1 \_ -> do
                 setState \s -> { counter: s.counter + 1 }
             , children:
-                [ R.text (label <> ": " <> show counter)
+                [ R.text (props.label <> ": " <> show state.counter)
                 ]
             }
       in
